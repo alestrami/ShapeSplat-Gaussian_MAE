@@ -189,7 +189,7 @@ For simplicity, we follow the approach in Point-MAE and create a separate folder
 
 
 ## Reproducing Results
-We reproduce the modelnet10/modelnet40 finetuning classification results with the released codebase in the following table, which is consistent with the results reported in the paper. The best results are obtained with pretraining using objects of 1k Gaussians and finetuning on 4k Gaussians. The corresponding model checkpoints are are released at [gaussian_mae_ckpts](https://huggingface.co/datasets/ShapeSplats/sharing/tree/main/gaussian_mae_ckpts). Note the results will vary during different runs.
+We reproduce the modelnet10/modelnet40 finetuning classification results with the released codebase in the following table, which is consistent with the results reported in the paper. The best results are obtained with pretraining using objects of 1k Gaussians and finetuning on 4k Gaussians. The corresponding model checkpoints are uploaded at [gaussian_mae_ckpts](https://huggingface.co/datasets/ShapeSplats/sharing/tree/main/gaussian_mae_ckpts). Note the results will vary during different runs.
 
 | GS number | pretrain 1k |  | pretrain 4k |  |
 |--------|-------------|-------------|-------------|-------------|
