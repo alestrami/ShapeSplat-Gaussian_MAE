@@ -10,14 +10,14 @@
 #SBATCH --mem 128GB
 
 source /scratch_net/schusch/qimaqi/miniconda3/etc/profile.d/conda.sh
-conda activate gaussian_mae
+conda activate shape_splat
 
-cd ..
 cd ..
 
 python main.py \
-    --config cfgs/fintune/finetune_modelnet10_enc_full_group_xyz_1k.yaml \
+    --config cfgs/fintune/finetune_modelnet10_enc_full_group_xyz_4k.yaml \
     --finetune_model \
-    --exp_name modelnet_cls_enc_full_group_xyz_1k_nopre \
-    --seed 0
+    --exp_name release_finetune_modelnet10_full_4k_wo_pretrain_softknn \
+    --seed 0 \
+    --soft_knn
 
