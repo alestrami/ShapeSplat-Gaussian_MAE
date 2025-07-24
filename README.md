@@ -134,25 +134,25 @@ In this section, we outline the steps to pretrain the Gaussian-MAE model. For ea
 
 Below are some important parameters you can modify to create new experiment setups:
 
-- **`dataset.{split}.others.norm_attribute`** 
+- `dataset.{split}.others.norm_attribute` 
 This parameter connects with Section 4.2 of the paper, which discusses the attribute used for normalization.
 
-- **`model.group_size`** 
+- `model.group_size` 
 Specifies the number of gaussians considered for one group/token.
   
-- **`model.num_group`** 
+- `model.num_group`
 Specifies the number of groups/tokens.
 
-- **`model.attribute`** 
+- `model.attribute` 
 The embedding feature discussed in Section 4.1 of the paper.
 
-- **`model.group_attribute`** 
+- `model.group_attribute` 
 The grouping feature discussed in Section 4.1 of the paper.
 
-- **`npoints`** 
+- `npoints` 
 The number of points after sampling from the input Gaussians is ablated in Table E.1 in the supplementary material. Note that you need to modify th `group_size` and `num_group` accordingly.
 
-- **`soft_knn`** 
+- `soft_knn` 
 To enable the **splats pooling layer** discussed in Section 4.3 of the paper, in the experiments you should set group_attribute = ['xyz'] when enabling the soft KNN.
 
 
@@ -163,44 +163,48 @@ In following example we show the example code to pretrain with E(All), G(xyz) de
 python main.py \
     --config cfgs/pretrain/pretrain_enc_full_group_xyz_1k.yaml \
     --exp_name gaussian_mae_enc_full_group_xyz_1k \
+    --soft_knn \ 
     # --resume 
 ```
 
 
 ## ModelNet Finetuning
-After pretraining, you can submit the finetuning task with `cls10_job_enc_full_group_xyz_1k.sh` in  `sh_jobs/finetune`. Similar to pretraining, you have to define one config for each experiment. Notice that the finetuning parameters need to be aligned with the pretraining config.
+After pretraining, you can submit the finetuning task with `cls10_job_enc_full_group_xyz_4k.sh` in  `sh_jobs/finetune`. Similar to pretraining, you have to define one config for each experiment. Notice that the finetuning parameters need to be aligned with the pretraining config.
 
 ```bash
-PRETRAIN_CKPT=<The pretrain checkpoint above>
-
-# check if PRETRAIN_CKPT exists
-if [ ! -f "$PRETRAIN_CKPT" ]; then
-    echo "$PRETRAIN_CKPT does not exist."
-    exit 1
-fi
-
 python main.py \
-    --config cfgs/fintune/finetune_modelnet10_enc_full_group_xyz_1k.yaml \
+    --config cfgs/fintune/finetune_modelnet10_enc_full_group_xyz_4k.yaml \
     --finetune_model \
-    --exp_name modelnet10_cls_enc_full_group_xyz_1k \
+    --exp_name release_finetune_modelnet10_full_4k_pretrain_1k_softknn \
     --seed 0 \
-    --ckpts ${PRETRAIN_CKPT}
+    --ckpts ${PRETRAIN_CKPT} \
+    --soft_knn \
+    # --use_wandb \
 ```
 
 ## ShapeSplat-Part Segmentation
 For ShapeSplat-Part segmentation, we utilize the Gaussian splats generated for ShapeNet-Part. Since ShapeNet-Part is a subset of ShapeNetCore, please refer to [DATA.md](./DATA.md) for instructions on downloading the segmentation annotation files.
 
-For simplicity, we follow the approach in PointMAE and create a separate folder for part segmentation finetuning. Please refer to [segmentation_gs](./segmentation_gs/) for detailed usage instructions.
+For simplicity, we follow the approach in Point-MAE and create a separate folder for part segmentation finetuning. Please refer to [segmentation_gs](./segmentation_gs/) for detailed usage instructions.
 
 
-## Results
-**Pretraining** results are stored in the [experiments/exp-config/](./experiments/) folder. Within this folder, you will find the `<exp_name>` and `TFBoard` subdirectories.
+## Reproducing Results
+We reproduce the modelnet10/modelnet40 finetuning classification results with the released codebase in the following table, which is consistent with the results reported in the paper. The best results are obtained with pretraining using objects of 1k Gaussians and finetuning on 4k Gaussians. The corresponding model checkpoints are are released at [gaussian_mae_ckpts](https://huggingface.co/datasets/ShapeSplats/sharing/tree/main/gaussian_mae_ckpts). Note the results will vary during different runs.
+
+| GS number | pretrain 1k |  | pretrain 4k |  |
+|--------|-------------|-------------|-------------|-------------|
+| **soft_knn** | True | False | True | False |
+| **finetune 4k** | 95.70484/<br>92.41994 | 95.37445/<br>93.43332 | 95.48458/<br>92.41994 | 95.26431/<br>93.06851 |
+
+
+
+**Pretraining** results are stored in the `experiments/<config_name>/` folder. Within this folder, you will find the `<exp_name>` and `TFBoard` subdirectories.
 
 - **TensorBoard Logging**: Pretraining loss is logged in TensorBoard.
 - **Using Weights & Biases**: To log metrics via Weights & Biases, pass the `--use_wandb` argument during training.
 - **Gaussian Reconstruction**: The reconstructed Gaussians from the last epoch are saved in the `save_ply` folder. These can be visualized using standard Gaussian visualization tools like the [Interactive Viewer](https://github.com/graphdeco-inria/gaussian-splatting?tab=readme-ov-file#interactive-viewers) or the [Online Viewer](https://playcanvas.com/supersplat/editor/).
 
-**ModelSplat finetuning** results are similarly stored in the [experiments/exp-config/](./experiments/) folder.
+**ModelSplat finetuning** results are similarly stored in the `experiments/<config_name>/` folder.
 
 - **Accuracy Logging**: The best accuracy is logged with wandb, also you can find it in the `.log` file by searching for `ckpt-best.pth`.
 
