@@ -174,9 +174,7 @@ def run_net(args, config, train_writer=None, val_writer=None):
                 points = points[:, random_idx, :].contiguous()
 
             # import pdb; pdb.set_trace()
-            points = train_transforms.augument(
-                points, attribute=config.model.group_attribute
-            )
+            points = train_transforms(points)
 
             ret = base_model(points)
 
@@ -496,7 +494,7 @@ def test_vote(
                     .contiguous()
                 )  # (B, N, 3)
 
-                # points = test_transforms(points)
+                points = test_transforms(points)
 
                 logits = base_model(points)
                 target = label.view(-1)

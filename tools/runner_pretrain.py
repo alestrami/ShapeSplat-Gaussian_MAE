@@ -152,7 +152,7 @@ def run_net(args, config, train_writer=None, val_writer=None):
                 points = points[:, random_idx, :].contiguous()
 
             if (
-                epoch == config.max_epoch and idx % 50 == 0
+                epoch == config.max_epoch and idx % 5000 == 0
             ):  # save last epoch ply for visualization
                 loss_dict, vis_gaussians, full_rebuild_gaussian, original_gaussians = (
                     base_model(points, save=True)
@@ -200,9 +200,7 @@ def run_net(args, config, train_writer=None, val_writer=None):
                     )
             else:
                 if epoch != config.max_epoch:
-                    points = train_transforms.augument(
-                        points, attribute=config.model.attribute
-                    )
+                    points = train_transforms(points)
                 loss_dict = base_model(points)
 
             # aggregate all loss
