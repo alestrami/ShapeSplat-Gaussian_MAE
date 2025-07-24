@@ -30,12 +30,14 @@ model : {
   cls_dim: 10,
   num_heads: 6,
   group_size: 32,
-  num_group: 64,
+  num_group: 128,
   encoder_dims: 384,
   type: full,
 }
 
-npoints: 1024
+
+
+npoints: 4096
 npoints_fps: True
 total_bs : 224
 step_per_update : 1
