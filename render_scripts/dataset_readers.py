@@ -55,6 +55,25 @@ class SceneInfo(NamedTuple):
     ply_path: str
 
 
+def convert_cam_coords(transform_matrix):
+    P = np.array([
+        [1, 0, 0, 0],
+        [0, 0, 1, 0],
+        [0, 1, 0, 0],
+        [0, 0, 0, 1]
+    ])
+
+    C = np.array([
+        [1,  0,  0, 0],
+        [0, -1,  0, 0],
+        [0,  0, -1, 0],
+        [0,  0,  0, 1]
+    ])
+
+    new_transform_matrix = P @ transform_matrix @ C
+    return new_transform_matrix
+
+
 def getNerfppNorm(cam_info):
     def get_center_and_diag(cam_centers):
         cam_centers = np.hstack(cam_centers)
@@ -295,12 +314,9 @@ def readCamerasFromTransforms(path, transformsfile, white_background, extension=
                 for idx, frame in enumerate(frames):
                     cam_name = os.path.join(path, frame["file_path"] + extension)
 
-                    # NeRF 'transform_matrix' is a camera-to-world transform
+                    # Note, process 'transform_matrix' into a opencv style camera-to-world matrix
                     c2w = np.array(frame["transform_matrix"])
-                    # change from OpenGL/Blender camera axes (Y up, Z back) to COLMAP (Y down, Z forward)
-                    c2w[:3, 1:3] *= -1
-                    c2w_copy = c2w.copy()
-                    c2w[[1, 2]] = c2w_copy[[2, 1]]
+                    c2w = convert_cam_coords(c2w)
 
                     # get the world-to-camera transform and set R, T
                     w2c = np.linalg.inv(c2w)
@@ -353,12 +369,9 @@ def readCamerasFromTransforms(path, transformsfile, white_background, extension=
             for idx, frame in enumerate(frames):
                 cam_name = os.path.join(path, frame["file_path"] + extension)
 
-                # NeRF 'transform_matrix' is a camera-to-world transform
+                # Note, process 'transform_matrix' into a opencv style camera-to-world matrix
                 c2w = np.array(frame["transform_matrix"])
-                # change from OpenGL/Blender camera axes (Y up, Z back) to COLMAP (Y down, Z forward)
-                c2w[:3, 1:3] *= -1
-                c2w_copy = c2w.copy()
-                c2w[[1, 2]] = c2w_copy[[2, 1]]
+                c2w = convert_cam_coords(c2w)
 
                 # get the world-to-camera transform and set R, T
                 w2c = np.linalg.inv(c2w)
