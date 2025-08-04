@@ -29,7 +29,7 @@ $^\star$: Equal Contribution, $^\dagger$: Corresponding Author <br>
 - [x] `08.09.2024`: The ModelNet-Splats is released on [Huggingface](https://huggingface.co/datasets/ShapeSplats/ModelNet_Splats). Please follow the ModelNet [term of use](https://modelnet.cs.princeton.edu/#).
 - [x] `16.12.2024`: Code release.
 - [x] `24.12.2024`: ShapeSplat is accepted as 3DV oral! 🎄 Meet you in Singapore!
-- [x] `23.03.2025`: The 2D renders together with camera parameters are released on [Huggingface](https://huggingface.co/datasets/ShapeSplats/sharing).
+- [x] `23.03.2025`: The 2D renderings together with camera parameters are released on [Huggingface](https://huggingface.co/datasets/ShapeSplats/sharing).
 
 
 ## Method
@@ -120,12 +120,18 @@ conda config --set channel_priority flexible
 conda env create -f env.yaml
 ```
 
-## Dataset Preparation
+## Dataset
 
 Please refer to the instructions in the [DATA.md](./DATA.md) on data preparation. The instructions cover:  
 - Prepare the pretraining dataset.  
 - Set up finetuning datasets for classification and segmentation tasks.  
 - Update the data config and some environement parameters
+
+### 2D Rendering Results
+
+We released the 2D rendering results of ShapeSplat dataset, which can be downloaded from [Huggingface](https://huggingface.co/datasets/ShapeSplats/sharing). The 2D renders are generated using the [render_scripts](./render_scripts). The image/depth/normal renders are in the [ShapeSplat_2d_renders](https://huggingface.co/datasets/ShapeSplats/sharing/tree/main/ShapeSplat_2d_renders) folder, and the camera parameters are saved in per-object `transforms.json` in the [ShapeSplat_render_cams](https://huggingface.co/datasets/ShapeSplats/sharing/tree/main/ShapeSplat_render_cams) folder.
+
+Note, there is coordinate inconsistency at the beginning, the poses of the 2D renderings saved in frame['transform_matrix'] is not aligned to the world coordinate of the 3DGS object and the OBJ mesh. Please refer to the [README](https://huggingface.co/datasets/ShapeSplats/sharing/blob/main/README.md) for alignment.
 
 
 ## Pretraining
