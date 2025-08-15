@@ -22,14 +22,15 @@ $^\star$: Equal Contribution, $^\dagger$: Corresponding Author <br>
 
 
 ## News
-- [x] `20.08.2024`: The [Project Page](https://unique1i.github.io/ShapeSplat/) is released!
-- [x] `21.08.2024`: The Paper is released on [Arxiv](https://arxiv.org/pdf/2408.10906).
-- [x] `05.09.2024`: Our ShapeSplat [dataset](https://huggingface.co/datasets/ShapeNet/ShapeSplatsV1) part is released under the official ShapeNet repository! We thank the support from the ShapeNet team!
-- [x] `05.09.2024`: Dataset rendering code release in [render_scripts](./render_scripts)
-- [x] `08.09.2024`: The ModelNet-Splats is released on [Huggingface](https://huggingface.co/datasets/ShapeSplats/ModelNet_Splats). Please follow the ModelNet [term of use](https://modelnet.cs.princeton.edu/#).
-- [x] `16.12.2024`: Code release.
-- [x] `24.12.2024`: ShapeSplat is accepted as 3DV oral! 🎄 Meet you in Singapore!
+- [x] `24.07.2025`: Our SceneSplat project, which extends to 3DGS scene pretraining is accepted as ICCV 2025 oral! 🎉 Check out the [project page](https://unique1i.github.io/SceneSplat_webpage/).
 - [x] `23.03.2025`: The 2D renderings together with camera parameters are released on [Huggingface](https://huggingface.co/datasets/ShapeSplats/sharing).
+- [x] `24.12.2024`: ShapeSplat is accepted as 3DV oral! 🎄 Meet you in Singapore!
+- [x] `16.12.2024`: Code release.
+- [x] `08.09.2024`: The ModelNet-Splats is released on [Huggingface](https://huggingface.co/datasets/ShapeSplats/ModelNet_Splats). Please follow the ModelNet [term of use](https://modelnet.cs.princeton.edu/#).
+- [x] `05.09.2024`: Dataset rendering code release in [render_scripts](./render_scripts)
+- [x] `05.09.2024`: Our ShapeSplat [dataset](https://huggingface.co/datasets/ShapeNet/ShapeSplatsV1) part is released under the official ShapeNet repository! We thank the support from the ShapeNet team!
+- [x] `21.08.2024`: The Paper is released on [Arxiv](https://arxiv.org/pdf/2408.10906).
+- [x] `20.08.2024`: The [Project Page](https://unique1i.github.io/ShapeSplat/) is released!
 
 
 ## Method
@@ -219,7 +220,7 @@ We provide the checkpoints of pretrained model using all the 3DGS attributes, an
 
 ## Citation
 
-If you find our work helpful, please consider citing the following papers and/or ⭐ our repo.
+If you find our method/dataset helpful, please consider citing our paper and/or ⭐ our repo.
 <div style="max-width: 1200px; overflow-x: auto;">
 <pre>
 <code>
@@ -233,25 +234,8 @@ If you find our work helpful, please consider citing the following papers and/or
       url={https://arxiv.org/abs/2408.10906}, 
 }
 </code>
-<code>
-@article{chang2015shapenet,
-      title={Shapenet: An information-rich 3d model repository},
-      author={Chang, Angel X and Funkhouser, Thomas and Guibas, Leonidas and Hanrahan, Pat and Huang, Qixing and Li, Zimo and Savarese, Silvio and Savva, Manolis and Song, Shuran and Su, Hao and others},
-      journal={arXiv preprint arXiv:1512.03012},
-      year={2015}
-}
-</code>
-<code>
-@inproceedings{wu20153d,
-      title={3d shapenets: A deep representation for volumetric shapes},
-      author={Wu, Zhirong and Song, Shuran and Khosla, Aditya and Yu, Fisher and Zhang, Linguang and Tang, Xiaoou and Xiao, Jianxiong},
-      booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition},
-      pages={1912--1920},
-      year={2015}
-}
-</code>
 </pre>
 </div>
 
 ## Acknowledgements
-We sincerely thank the ShapeNet and ModelNet teams for their efforts in creating and open-sourcing the datasets. We express our gratitude to the team of PointMAE for providing the public codebase, which served as the foundation for our further development.
+We sincerely thank the ShapeNet and ModelNet teams for their efforts in creating and open-sourcing the datasets. We express our gratitude to the team of Point-MAE for providing the public codebase, which served as the foundation for our further development.
