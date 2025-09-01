@@ -224,15 +224,14 @@ If you find our method/dataset helpful, please consider citing our paper and/or 
 <div style="max-width: 1200px; overflow-x: auto;">
 <pre>
 <code>
-@misc{ma2024shapesplat,
-      title={ShapeSplat: A Large-scale Dataset of Gaussian Splats and Their Self-Supervised Pretraining}, 
-      author={Qi Ma and Yue Li and Bin Ren and Nicu Sebe and Ender Konukoglu and Theo Gevers and Luc Van Gool and Danda Pani Paudel},
-      year={2024},
-      eprint={2408.10906},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2408.10906}, 
-}
+  @inproceedings{ma2025large,
+    title={A Large-Scale Dataset of Gaussian Splats and Their Self-Supervised Pretraining},
+    author={Ma, Qi and Li, Yue and Ren, Bin and Sebe, Nicu and Konukoglu, Ender and Gevers, Theo and Van Gool, Luc and Paudel, Danda Pani},
+    booktitle={2025 International Conference on 3D Vision (3DV)},
+    pages={145--155},
+    year={2025},
+    organization={IEEE}
+  }
 </code>
 </pre>
 </div>
