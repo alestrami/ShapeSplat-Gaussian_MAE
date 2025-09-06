@@ -22,6 +22,7 @@ $^\star$: Equal Contribution, $^\dagger$: Corresponding Author <br>
 
 
 ## News
+- [x] `05.09.2025`: We extend our ShapeSplat dataset with Objaverse split, now the total number of objects is 206K!
 - [x] `24.07.2025`: Our SceneSplat project, which extends to 3DGS scene pretraining is accepted as ICCV 2025 oral! 🎉 Check out the [project page](https://unique1i.github.io/SceneSplat_webpage/).
 - [x] `23.03.2025`: The 2D renderings together with camera parameters are released on [Huggingface](https://huggingface.co/datasets/ShapeSplats/sharing).
 - [x] `24.12.2024`: ShapeSplat is accepted as 3DV oral! 🎄 Meet you in Singapore!
@@ -55,8 +56,20 @@ We utilize our dataset for unsupervised pretraining and supervised finetuning fo
 </details>
 
 
-## Datasets
-You can download the ShapeSplat dataset from the official ShapeNet [repository](https://huggingface.co/datasets/ShapeNet/ShapeSplatsV1). Due to file size limitation, some of the subsets may be splitted into multiple zip files (e.g. 03001627_0.zip and 03001627_1.zip). You can unzip data and merge them by using the [unzip.sh](scripts/unzip.sh): 
+## ShapeSplat
+Our ShapeSplat dataset contains three splits: ShapeNet part, ModelNet part, and Objaverse part, in total of **206K** objects. The following table summarizes the statistics of each split.
+
+| Data Split | ShapeNet-Core | ModelNet | Objaverse |
+|---|---|---|---|
+| Category | 55 | 40 | - |
+| Objects | 52,121 | 12,309 | 141,703 |
+| GPU-days (L4) | 548.41 | 51.03 | 787.23 |
+| Avg. Gaussians | 24,267 | 22,456 | 50,000 |
+| PSNR | 44.187 | 45.104 | 33.71 |
+
+The ModelNet part, and Objaverse part, are hosted at [ModelNet_Splats](https://huggingface.co/datasets/ShapeSplats/ModelNet_Splats) and [Objaverse_Splats](https://huggingface.co/datasets/ShapeSplats/Objaverse_Splats).
+
+Please download the ShapeNet part from the official ShapeNet [repository](https://huggingface.co/datasets/ShapeNet/ShapeSplatsV1). Due to file size limitation, some of the subsets may be splitted into multiple zip files (e.g. 03001627_0.zip and 03001627_1.zip). Please unzip data and merge them by using the [unzip.sh](scripts/unzip.sh): 
 
 <details>
   <summary>
@@ -121,7 +134,7 @@ conda config --set channel_priority flexible
 conda env create -f env.yaml
 ```
 
-## Dataset
+## Data Preparation
 
 Please refer to the instructions in the [DATA.md](./DATA.md) on data preparation. The instructions cover:  
 - Prepare the pretraining dataset.  
