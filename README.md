@@ -1,4 +1,4 @@
-# ShapeSplat-Gaussian-MAE
+# ShapeSplat
 
 <p align="left">
     <img src="media/demo.jpg" alt="ShapeSplat Demo" style="width:100%; max-width:1200px;">
@@ -16,9 +16,10 @@ $^\star$: Equal Contribution, $^\dagger$: Corresponding Author <br>
 <sup>5</sup> University of Trento, Italy <br>
 
 [![arXiv](https://img.shields.io/badge/arXiv-2408.10906-blue?logo=arxiv&color=%23B31B1B)](https://arxiv.org/abs/2408.10906)
-[![ShapeSplat Project Page](https://img.shields.io/badge/ShapeSplat-Project%20Page-red?logo=globe)](https://unique1i.github.io/ShapeSplat/)
-[![ShapeSplat Dataset Release](https://img.shields.io/badge/ShapeSplat-Dataset%20Release-blue?logo=globe)](https://huggingface.co/datasets/ShapeNet/ShapeSplatsV1)
-[![ModelNetSplats Dataset Release](https://img.shields.io/badge/ModelNetSplats-Dataset%20Release-blue?logo=globe)](https://huggingface.co/datasets/ShapeSplats/ModelNet_Splats)
+[![ShapeSplat Project Page](https://img.shields.io/badge/ShapeSplat-Project%20Page-red?logo=globe)](https://unique1i.github.io/ShapeSplat_webpage/)
+[![ShapeSplat Data](https://img.shields.io/badge/ShapeSplat-Data-blue?logo=globe)](https://huggingface.co/datasets/ShapeNet/ShapeSplatsV1)
+[![ModelNetSplats Data](https://img.shields.io/badge/ModelNetSplats-Data-blue?logo=globe)](https://huggingface.co/datasets/ShapeSplats/ModelNet_Splats)
+[![ObjaverseSplats Data](https://img.shields.io/badge/ObjaverseSplats-Data-blue?logo=globe)](https://huggingface.co/datasets/ShapeSplats/Objaverse_Splats)
 
 
 ## News
