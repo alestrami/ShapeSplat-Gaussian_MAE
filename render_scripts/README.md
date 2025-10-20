@@ -63,7 +63,11 @@ In order to use such initialization, you only need to simply replace the dataset
 
 With render output and modified dataset_readers.py you can start training the ShapeNet and ModelNet or other CAD models efficiently.
 
+## ALE ADDED
+Once you created the dataset with the previous instruction, you could either run the classic gaussian splatting repo or run gsplat through splatfacto. Unfortunately gpslat only accept COLMAP outputs but you can workaround it and have the viewer using nerfstudio.
+The command, for a synthethic blender dataset is:
 
+ns-train splatfacto blender-data --data /path/to/your/data/folder/
 
 
 ## Citation

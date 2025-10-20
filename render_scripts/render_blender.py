@@ -14,6 +14,10 @@ import sys
 import os
 import json
 import copy
+import os
+import re
+import copy
+import json
 
 # import trimesh
 
@@ -264,16 +268,35 @@ for i in range(args.views):
 
     scene.render.filepath = obj_save_dir + "/image/" + str(i).zfill(3)
 
-    tree.nodes["Depth Output"].file_slots[0].path = "/depth/" + str(i).zfill(3)
-    tree.nodes["Normal Output"].file_slots[0].path = "/normal/" + str(i).zfill(3)
+    tree.nodes["Depth Output"].file_slots[0].path = "/depth/" + str(i).zfill(3)+'.png'
+    tree.nodes["Normal Output"].file_slots[0].path = "/normal/" + str(i).zfill(3)+'.png'
 
     bpy.ops.render.render(write_still=True)  # render still
 
+    # Get image dimensions from Blender scene
+    img_width = scene.render.resolution_x
+    img_height = scene.render.resolution_y
+
+    # Compute camera intrinsics dynamically
+    cam_data = bpy.data.objects["Camera"].data
+    fl_x = cam_data.lens / cam_data.sensor_width * img_width
+    fl_y = cam_data.lens / cam_data.sensor_height * img_height
+    cx = img_width / 2
+    cy = img_height / 2
+
+
     frame_data = {
-        "file_path": "image/" + str(i).zfill(3),
+        "file_path": "image/" + str(i).zfill(3), #+ ".png",
+        "depth_file_path": "depth/" + str(i).zfill(3), #+ ".png",
         "rotation": radians(stepsize),
         "transform_matrix": listify_matrix(cam.matrix_world),
-    }
+        #"fl_x": fl_x,
+        #"fl_y": fl_y,
+        #"cx": cx,
+        #"cy": cy,
+        #"w": img_width,
+        #"h": img_height
+}
     out_data["frames"].append(frame_data)
 
     if i == args.views - 1:
@@ -298,6 +321,20 @@ with open(os.path.join(obj_save_dir, "transforms_test.json"), "w") as f:
 with open(os.path.join(obj_save_dir, "transforms_val.json"), "w") as f:
     json.dump(test_json, f, indent=4)
 
+# --- Clean Blender File Output names ---
+for folder_name in ["image", "depth", "normal"]:
+    folder = os.path.join(obj_save_dir, folder_name)
+    if not os.path.exists(folder):
+        continue  # skip if folder doesn't exist
+    files = sorted(os.listdir(folder))
+    for filename in files:
+        # Match patterns like '000.png0001.png'
+        match = re.match(r"(\d+)\.png\d+\.png", filename)
+        if match:
+            new_name = f"{match.group(1)}.png"
+            old_path = os.path.join(folder, filename)
+            new_path = os.path.join(folder, new_name)
+            shutil.move(old_path, new_path)
 
 # zip image file, depth files and normals
 print("zip image file, depth files and normals")
@@ -311,7 +348,7 @@ shutil.make_archive(
     os.path.join(obj_save_dir, "normal"), "zip", os.path.join(obj_save_dir, "normal")
 )
 
-shutil.rmtree(os.path.join(obj_save_dir, "image"))
-shutil.rmtree(os.path.join(obj_save_dir, "depth"))
-shutil.rmtree(os.path.join(obj_save_dir, "normal"))
+#shutil.rmtree(os.path.join(obj_save_dir, "image"))
+#shutil.rmtree(os.path.join(obj_save_dir, "depth"))
+#shutil.rmtree(os.path.join(obj_save_dir, "normal"))
 # print("vertical_list", vertical_list)
